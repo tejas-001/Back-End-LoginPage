@@ -73,4 +73,19 @@ router.get('/getall', (request, response) => {
 
     })
 })
+ router.get('/search/:search', (request, response) => {
+    const { search } = request.params
+    console.log(search)
+    console.log('All information is displayed')
+    const query = `SELECT * from User WHERE firstName = '${search}'`
+    db.execute(query,[],(error,result) => {
+        if(error) {
+           response.send(error)
+        }
+        else {
+            response.send(result)
+        }
+
+    })
+})
 module.exports = router
